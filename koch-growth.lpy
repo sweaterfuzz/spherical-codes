@@ -1,0 +1,44 @@
+from math import sin, degrees
+
+R = 100.
+#R = 10.
+#R = 2. 
+
+dl = 0.009
+alpha = dl/2.0/R
+alphadeg = degrees(alpha)
+chord = 2.0*R*sin(alpha)
+
+Axiom: K
+
+production:
+derivation length: 8
+
+K --> -(90)J
+J --> *
+
+
+G : 
+  produce SG
+
+
+decomposition:
+maximum depth: 2
+
+J:
+  produce GJG+(60.)GJG-(120.)GJG+(60.)GJG
+  
+interpretation:
+
+S:
+  produce _(0.02);(1)^(alphadeg)F(chord)^(alphadeg)
+
+endlsystem
+###### INITIALISATION ######
+
+__lpy_code_version__ = 1.1
+
+__copyright__ = 'open-source GPL'
+__description__ = '- change the number of sides of the polygon\n\n- compute the length of the polygone using production rules\n'
+__institutes__ = 'INRIA - CIRAD Virtual Plants'
+__authors__ = 'C. Godin, F. Boudon'

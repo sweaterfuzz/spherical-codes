@@ -1,0 +1,82 @@
+from math import sin
+
+#N = 170
+R = 1. #vary R from 0.1 to 100
+
+dl = 5.0
+alpha = dl/2.0/R
+h = 2.0*R*sin(alpha)
+
+eps = 0.00001
+
+pitch0 = 0.
+pitch1 = 1.
+pitch2 = 2.
+pitch3 = 5.
+pitch4 = 10.
+pitch5 = 15.
+pitch6 = 20.
+pitch7 = 30.
+
+T0 = 72
+T1m = T0+71
+T1p = T1m+71
+T2m = T1p+67
+T2p = T2m+67
+T3m = T2p+51
+T3p = T3m+51
+T4m = T3p+33
+T4p = T4m+33
+T5m = T4p+23
+T5p = T5m+23
+T6m = T5p+18
+T6p = T6m+18
+T7m = T6p+12
+T7 = T7m+12
+
+Axiom: G(1)
+# for i in xrange(10):
+#   nproduce [G(1,i*pitchstep)?P(x,y,z)]
+
+production:
+
+derivation length: T7
+# G(n, pitch) --> S(n)-(pitch)G(n+1, pitch)
+
+G(n,Pitch)?P(x,y,z):
+  if x < eps and y < eps and z < eps:
+    produce 
+  else:
+    produce S(n)-(pitch)G(n+1, pitch)?P(x,y,z)
+
+G(n) : 
+  if n < T0: produce S(n)-(pitch0)G(n+1)
+  elif n < T1m: produce S(n)-(pitch1)G(n+1)
+  elif n < T1p: produce S(n)+(pitch1)G(n+1)
+  elif n < T2m: produce S(n)-(pitch2)G(n+1)
+  elif n < T2p: produce S(n)+(pitch2)G(n+1)
+  elif n < T3m: produce S(n)-(pitch3)G(n+1)
+  elif n < T3p: produce S(n)+(pitch3)G(n+1)
+  elif n < T4m: produce S(n)-(pitch4)G(n+1)
+  elif n < T4p: produce S(n)+(pitch4)G(n+1)
+  elif n < T5m: produce S(n)-(pitch5)G(n+1)
+  elif n < T5p: produce S(n)+(pitch5)G(n+1)
+  elif n < T6m: produce S(n)-(pitch6)G(n+1)
+  elif n < T6p: produce S(n)+(pitch6)G(n+1)
+  elif n < T7m: produce S(n)-(pitch7)G(n+1)
+  else: produce S(n)+(pitch7)G(n+1)
+
+interpretation:
+
+S(x):
+  produce _(0.1);(2)^(alpha)F(h)^(alpha)
+
+endlsystem
+###### INITIALISATION ######
+
+__lpy_code_version__ = 1.1
+
+__copyright__ = 'open-source GPL'
+__description__ = '- change the number of sides of the polygon\n\n- compute the length of the polygone using production rules\n'
+__institutes__ = 'INRIA - CIRAD Virtual Plants'
+__authors__ = 'C. Godin, F. Boudon'

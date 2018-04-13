@@ -1,0 +1,78 @@
+from math import sin,degrees,radians,acos
+from random import uniform
+
+#!/usr/bin/env python
+import numpy as np
+import matplotlib.mlab as mlab
+import matplotlib.pyplot as plt
+
+N = 40
+Walks = 20
+R = 6. 
+
+dl = 1.
+alpha = dl/(2.0*R)
+alphaDeg = degrees(alpha)
+chord = 2.0*R*sin(alpha)
+
+max_pitch = 180.
+min_pitch = -max_pitch
+
+geodesicLen = np.zeros(Walks)
+geodesicMean = np.zeros(N)
+geodesicStd = np.zeros(N)
+geodesicVar = np.zeros(N)
+
+def StartEach():
+  geodesicLen=np.zeros(Walks)
+
+def EndEach():
+  geodesicMean[Nstep] = np.mean(np.power(geodesicLen,2))
+  geodesicStd[Nstep] = np.std(np.power(geodesicLen,2))
+  geodesicVar[Nstep] = np.var(np.power(geodesicLen,2))
+
+def End():
+    plt.clf()
+    plt.plot(geodesicMean, 'ro')
+    #plt.fill_between(geodesicMean+geodesicStd, geodesicMean-geodesicStd, facecolor='blue', alpha=0.5)
+    plt.xlabel('Time')
+    plt.ylabel('Mean squared geodesic length')
+    plt.title('Mean squared geodesic lengths over time')
+    plt.grid(True)
+
+    plt.show()
+    plt.savefig('MSGDr6n80w500')
+
+  
+def Pitch():
+  return uniform(min_pitch,max_pitch)
+
+Axiom: 
+  for i in xrange(Walks):
+    nproduce [?U(0,0,0) G(i,0)]
+
+production:
+
+derivation length: N
+
+?U(x,y,z)G(i,n) : 
+  global Nstep
+  Nstep = n
+  theta = acos(x)
+  geodesicLen[i] = R*theta
+  produce -(Pitch())S?U(x,y,z) G(i,n+1)
+
+interpretation:
+
+S:
+  produce _(.1);(2)^(alphaDeg)F(chord)^(alphaDeg)
+
+endlsystem
+###### INITIALISATION ######
+
+__lpy_code_version__ = 1.1
+
+__copyright__ = 'open-source GPL'
+__description__ = '- change the number of sides of the polygon\n\n- compute the length of the polygone using production rules\n'
+__institutes__ = 'INRIA - CIRAD Virtual Plants'
+__authors__ = 'C. Godin, F. Boudon'

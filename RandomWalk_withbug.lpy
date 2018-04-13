@@ -1,0 +1,47 @@
+from math import sin,degrees,radians
+from random import uniform
+
+N = 630
+#R = 8. #'star' bug
+R = 10. #'disjoint' bug
+
+dl = 1.
+alpha = dl/(2.0*R)
+alphaDeg = degrees(alpha)
+chord = 2.0*R*sin(alpha)
+
+#max_pitch = 10. #no path defect
+#max_pitch = 90.
+max_pitch = 180.
+min_pitch = -max_pitch
+
+#def StartEach():
+#  global current_len
+#  print "angle =", alphaDeg, "chord =", chord
+  
+def Pitch():
+  return uniform(min_pitch,max_pitch)
+
+Axiom: G(1)
+
+production:
+
+derivation length: N
+
+G(n) : 
+  produce S(n)-(Pitch())G(n+1)
+
+interpretation:
+
+S(x):
+  produce _(.1);(2)^(alphaDeg)F(chord)^(alphaDeg)
+
+endlsystem
+###### INITIALISATION ######
+
+__lpy_code_version__ = 1.1
+
+__copyright__ = 'open-source GPL'
+__description__ = '- change the number of sides of the polygon\n\n- compute the length of the polygone using production rules\n'
+__institutes__ = 'INRIA - CIRAD Virtual Plants'
+__authors__ = 'C. Godin, F. Boudon'

@@ -1,0 +1,33 @@
+from math import sin
+
+N = 80
+pitch = 0.
+R = 1. #vary R from 0.1 to 100
+
+dl = 5.
+alpha = dl/2.0/R
+h = 2.0*R*sin(alpha)
+
+Axiom: G(1)
+
+production:
+
+derivation length: N
+
+G(n) : 
+  produce S(n)-(pitch)G(n+1)
+
+interpretation:
+
+S(x):
+  produce _(0.1);(2)^(alpha)F(h)^(alpha)
+
+endlsystem
+###### INITIALISATION ######
+
+__lpy_code_version__ = 1.1
+
+__copyright__ = 'open-source GPL'
+__description__ = '- change the number of sides of the polygon\n\n- compute the length of the polygone using production rules\n'
+__institutes__ = 'INRIA - CIRAD Virtual Plants'
+__authors__ = 'C. Godin, F. Boudon'

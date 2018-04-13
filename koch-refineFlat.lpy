@@ -1,0 +1,47 @@
+from math import sin, degrees, floor, pi
+
+R = 200.0
+N = 50
+#baseLength = 2.4*pi*R
+baseLength = pi*R/100.
+
+def alpha(b):
+  return b/2.0/R
+
+def alphadeg(b):
+  return degrees(alpha(b))
+
+def chord(b):
+  return 2.0*R*sin(alpha(b))
+
+Axiom: -(90)I(baseLength)
+
+production:
+derivation length: 5
+
+I(b) --> I(b/3.)+(60)I(b/3.)-(120)I(b/3.)+(60)I(b/3.)
+
+decomposition:
+
+
+interpretation:
+maximum depth: 2
+
+I(b):
+  x = b/N
+  for i in xrange(N):
+    nproduce S(x)
+  
+
+S(x):
+  produce _(0.02);(2)^(alphadeg(x))F(chord(x))^(alphadeg(x))
+
+endlsystem
+###### INITIALISATION ######
+
+__lpy_code_version__ = 1.1
+
+__copyright__ = 'open-source GPL'
+__description__ = '- change the number of sides of the polygon\n\n- compute the length of the polygone using production rules\n'
+__institutes__ = 'INRIA - CIRAD Virtual Plants'
+__authors__ = 'C. Godin, F. Boudon'

@@ -1,0 +1,52 @@
+from math import sin, degrees
+
+R = 1. #can scale to R=20, N = 3000
+#R = 1. #closes in N=175; runs to at least N=3000
+# R = 1 depth=2 closes in N=23; runs to at least N=3000
+
+dl = 0.009
+alpha = dl/2.0/R
+alphadeg = degrees(alpha)
+chord = 2.0*R*sin(alpha)
+
+Axiom: K
+
+production:
+derivation length: 8
+
+K --> J
+J --> *
+B --> *
+
+G : 
+  produce SG
+
+L : 
+  produce TL
+
+decomposition:
+maximum depth: 3
+
+J:
+  produce GJG+(90)GJG-(90)GJG-(90)GJG-(90)LBL+(90)GJG+(90)GJG+(90)GJG-(90)GJG
+
+B: 
+  produce LBLLBLLBL
+
+interpretation:
+
+S:
+  produce _(0.01);(2)^(alphadeg)F(chord)^(alphadeg)
+
+T:
+  produce _(0.01);(3)^(alphadeg)F(chord)^(alphadeg)
+
+endlsystem
+###### INITIALISATION ######
+
+__lpy_code_version__ = 1.1
+
+__copyright__ = 'open-source GPL'
+__description__ = '- change the number of sides of the polygon\n\n- compute the length of the polygone using production rules\n'
+__institutes__ = 'INRIA - CIRAD Virtual Plants'
+__authors__ = 'C. Godin, F. Boudon'
